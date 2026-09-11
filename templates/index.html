@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>CartMind | AI Shopping Assistant</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="app">
+      <!-- TOP NAVIGATION -->
+      <header class="top-nav">
+        <div class="logo-area">
+          <div class="logo-icon">✦</div>
+
+          <div>
+            <h1>CartMind</h1>
+            <span>AI Shopping Assistant</span>
+          </div>
+        </div>
+
+        <div class="search-area">
+          <span>⌕</span>
+
+          <input type="text" placeholder="Search products, categories..." />
+        </div>
+
+        <div class="nav-right">
+          <div class="online-status">
+            <span></span>
+            AI Online
+          </div>
+
+          <div class="profile">
+            <div class="profile-avatar">C</div>
+
+            <div>
+              <strong>Shopping AI</strong>
+              <small>Powered by Ollama</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN LAYOUT -->
+      <div class="main-layout">
+        <!-- LEFT SIDEBAR -->
+        <aside class="left-sidebar">
+          <p class="menu-title">EXPLORE</p>
+
+          <button class="side-item active">
+            <span>⌂</span>
+
+            <div>
+              <strong>AI Assistant</strong>
+              <small>Chat with CartMind</small>
+            </div>
+          </button>
+
+          <button class="side-item">
+            <span>⌕</span>
+
+            <div>
+              <strong>Products</strong>
+              <small>Search products</small>
+            </div>
+          </button>
+
+          <button class="side-item">
+            <span>◆</span>
+
+            <div>
+              <strong>Recommendations</strong>
+              <small>Find the right product</small>
+            </div>
+          </button>
+
+          <button class="side-item">
+            <span>★</span>
+
+            <div>
+              <strong>Reviews</strong>
+              <small>Customer insights</small>
+            </div>
+          </button>
+
+          <button class="side-item">
+            <span>📦</span>
+
+            <div>
+              <strong>Orders</strong>
+              <small>Track your order</small>
+            </div>
+          </button>
+
+          <div class="sidebar-divider"></div>
+
+          <p class="menu-title">QUICK HELP</p>
+
+          <button
+            class="mini-item"
+            onclick="useSuggestion('Where is my parcel?')"
+          >
+            Track an order
+          </button>
+
+          <button
+            class="mini-item"
+            onclick="useSuggestion('Recommend a gaming laptop')"
+          >
+            Find a laptop
+          </button>
+
+          <button
+            class="mini-item"
+            onclick="
+              useSuggestion('What do customers think about Lenovo Laptop 3?')
+            "
+          >
+            Read reviews
+          </button>
+
+          <div class="sidebar-footer">
+            <div class="status-circle"></div>
+
+            <div>
+              <strong>System Ready</strong>
+              <small>Qwen 2.5 • Ollama</small>
+            </div>
+          </div>
+        </aside>
+
+        <!-- CENTER CHAT -->
+        <main class="chat-section">
+          <!-- CHAT HEADER -->
+          <div class="chat-header">
+            <div>
+              <span class="chat-label"> AI SHOPPING ASSISTANT </span>
+
+              <h2>What are you looking for?</h2>
+
+              <p>
+                Ask me about products, recommendations, orders or customer
+                reviews.
+              </p>
+            </div>
+
+            <div class="model-badge">
+              <span></span>
+              Qwen 2.5
+            </div>
+          </div>
+
+          <!-- CHAT CONTENT -->
+          <section id="chat-box" class="chat-box">
+            <!-- WELCOME -->
+            <div class="welcome-section">
+              <div class="ai-large-icon">✦</div>
+
+              <h2>Your personal shopping assistant</h2>
+
+              <p>
+                CartMind helps you discover products, compare options,
+                understand reviews and get order information.
+              </p>
+
+              <!-- SUGGESTION CARDS -->
+              <div class="suggestion-grid">
+                <button
+                  onclick="useSuggestion('Recommend a gaming laptop')"
+                  class="suggestion-card"
+                >
+                  <div class="suggestion-icon">💻</div>
+
+                  <div>
+                    <strong> Find a Laptop </strong>
+
+                    <span> Get product recommendations </span>
+                  </div>
+
+                  <b>→</b>
+                </button>
+
+                <button
+                  onclick="useSuggestion('Tell me about Lenovo Laptop 3')"
+                  class="suggestion-card"
+                >
+                  <div class="suggestion-icon">🔎</div>
+
+                  <div>
+                    <strong> Product Details </strong>
+
+                    <span> Learn about a product </span>
+                  </div>
+
+                  <b>→</b>
+                </button>
+
+                <button
+                  onclick="
+                    useSuggestion(
+                      'What do customers think about Lenovo Laptop 3?',
+                    )
+                  "
+                  class="suggestion-card"
+                >
+                  <div class="suggestion-icon">⭐</div>
+
+                  <div>
+                    <strong> Read Reviews </strong>
+
+                    <span> Understand customer opinions </span>
+                  </div>
+
+                  <b>→</b>
+                </button>
+
+                <button
+                  onclick="useSuggestion('Where is my parcel?')"
+                  class="suggestion-card"
+                >
+                  <div class="suggestion-icon">📦</div>
+
+                  <div>
+                    <strong> Track Order </strong>
+
+                    <span> Get order information </span>
+                  </div>
+
+                  <b>→</b>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- TYPING INDICATOR -->
+          <div id="typing" class="typing hidden">
+            <div class="typing-avatar">✦</div>
+
+            <div class="typing-content">
+              <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+
+              <small> CartMind is thinking... </small>
+            </div>
+          </div>
+
+          <!-- INPUT -->
+          <div class="chat-input-area">
+            <div class="input-box">
+              <textarea
+                id="user-input"
+                rows="1"
+                placeholder="Ask CartMind anything..."
+                autocomplete="off"
+              ></textarea>
+
+              <button
+                id="send-button"
+                class="send-button"
+                aria-label="Send message"
+              >
+                ↑
+              </button>
+            </div>
+
+            <div class="input-bottom">
+              <span> Press Enter to send </span>
+
+              <span> CartMind • AI-powered shopping </span>
+            </div>
+          </div>
+        </main>
+
+        <!-- RIGHT PANEL -->
+        <aside class="right-panel">
+          <div class="panel-heading">
+            <span> SHOPPING TOOLS </span>
+
+            <h3>How can I help?</h3>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">⌕</div>
+
+            <div>
+              <strong> Product Search </strong>
+
+              <p>Find products and information.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">◆</div>
+
+            <div>
+              <strong> Smart Recommendations </strong>
+
+              <p>Get suggestions based on your needs.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">★</div>
+
+            <div>
+              <strong> Review Analysis </strong>
+
+              <p>Understand what customers think.</p>
+            </div>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">📦</div>
+
+            <div>
+              <strong> Order Support </strong>
+
+              <p>Get help with delivery and orders.</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon">✦</div>
+
+            <div>
+              <strong> About CartMind </strong>
+
+              <p>
+                CartMind uses AI to understand shopping questions and provide
+                helpful e-commerce assistance.
+              </p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
